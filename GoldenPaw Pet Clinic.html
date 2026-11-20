@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GoldenPaw Pet Clinic</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: {
+      gold: { 400:'#FBBF24', 500:'#F5B800' },
+      ink: { 900:'#000000', 800:'#121212', 700:'#1E1E1E', 600:'#2C2C2C' }
+    },
+    fontFamily: { heading:['Poppins','sans-serif'], body:['Inter','sans-serif'] }
+  } }
+}
+</script>
+<style>
+  :root { color-scheme: dark; box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body { background:#000; }
+  .section { display:none; }
+  .section.active { display:block; }
+  .nav-btn.active { color:#F5B800; }
+  :focus-visible { outline:2px solid #F5B800; outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+</style>
+</head>
+<body class="font-body text-gray-100 min-h-screen flex flex-col">
+
+<header class="sticky top-0 z-40 bg-ink-900 border-b border-gold-500/40" style="top:env(safe-area-inset-top,0px)">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <button onclick="showSection('home')" class="flex items-center gap-2 font-heading font-extrabold text-xl text-gold-500"><span class="text-2xl">🐾</span> GoldenPaw <span class="text-white font-semibold">Clinic</span></button>
+    <nav class="hidden md:flex gap-6 font-medium">
+      <button data-nav="home" class="nav-btn hover:text-gold-400" onclick="showSection('home')">Home</button>
+      <button data-nav="catalog" class="nav-btn hover:text-gold-400" onclick="showSection('catalog')">Services</button>
+      <button data-nav="booking" class="nav-btn hover:text-gold-400" onclick="showSection('booking')">Book a visit</button>
+      <button data-nav="about" class="nav-btn hover:text-gold-400" onclick="showSection('about')">About</button>
+    </nav>
+    <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')" class="md:hidden text-gold-500 text-2xl" aria-label="Menu">☰</button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden bg-ink-800 border-t border-gold-500/20 px-4 py-3 flex flex-col gap-3 font-medium">
+    <button data-nav="home" class="nav-btn text-left" onclick="showSection('home')">Home</button>
+    <button data-nav="catalog" class="nav-btn text-left" onclick="showSection('catalog')">Services</button>
+    <button data-nav="booking" class="nav-btn text-left" onclick="showSection('booking')">Book a visit</button>
+    <button data-nav="about" class="nav-btn text-left" onclick="showSection('about')">About</button>
+  </div>
+</header>
+
+<main class="flex-1">
+
+<section id="home" class="section active">
+  <div class="max-w-6xl mx-auto px-4 py-12 md:py-20 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <h1 class="font-heading font-extrabold text-4xl md:text-6xl leading-tight">Gentle care for every paw, wing and whisker.</h1>
+      <p class="mt-5 text-gray-300 text-lg max-w-prose">GoldenPaw is a general pet clinic for dogs, cats and all other animals. We handle checkups, vaccines, surgery, grooming and emergencies.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <button onclick="showSection('booking')" class="bg-gold-500 hover:bg-gold-400 text-ink-900 font-heading font-bold px-6 py-3 rounded-xl transition">Book an appointment</button>
+        <button onclick="showSection('catalog')" class="border-2 border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-ink-900 font-heading font-bold px-6 py-3 rounded-xl transition">See services</button>
+      </div>
+    </div>
+    <img id="heroImg" alt="Dog and cat at GoldenPaw clinic" class="rounded-3xl border-2 border-gold-500/70 w-full h-80 md:h-96 object-cover" onerror="fallbackImg(this)">
+  </div>
+  <div class="max-w-6xl mx-auto px-4 pb-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="bg-ink-800 border border-gold-500/25 rounded-2xl p-6"><div class="text-3xl mb-3">🩺</div><h3 class="font-heading font-bold text-gold-400">Experienced vets</h3><p class="text-sm text-gray-400 mt-1">Licensed veterinarians who treat your pet like family.</p></div>
+    <div class="bg-ink-800 border border-gold-500/25 rounded-2xl p-6"><div class="text-3xl mb-3">💉</div><h3 class="font-heading font-bold text-gold-400">Vaccinations</h3><p class="text-sm text-gray-400 mt-1">Full vaccine schedules and preventive care plans.</p></div>
+    <div class="bg-ink-800 border border-gold-500/25 rounded-2xl p-6"><div class="text-3xl mb-3">🚑</div><h3 class="font-heading font-bold text-gold-400">Emergency care</h3><p class="text-sm text-gray-400 mt-1">Fast help for injuries, poisoning and sudden illness.</p></div>
+    <div class="bg-ink-800 border border-gold-500/25 rounded-2xl p-6"><div class="text-3xl mb-3">🛁</div><h3 class="font-heading font-bold text-gold-400">Grooming and spa</h3><p class="text-sm text-gray-400 mt-1">Hygienic, stress-free grooming for a healthy coat.</p></div>
+  </div>
+</section>
+
+<section id="catalog" class="section">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="font-heading font-extrabold text-3xl md:text-4xl text-center">Our services</h2>
+    <p class="text-center text-gray-400 mt-2">Pick a category to see what we offer.</p>
+    <div id="filterTabs" class="flex flex-wrap justify-center gap-3 mt-8"></div>
+    <div id="catalogGrid" class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </div>
+</section>
+
+<section id="booking" class="section">
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h2 class="font-heading font-extrabold text-3xl md:text-4xl text-center">Book an appointment</h2>
+    <p class="text-center text-gray-400 mt-2">Fill in the details and send them to us on WhatsApp.</p>
+    <form id="bookingForm" class="mt-8 bg-ink-800 border border-gold-500/30 rounded-2xl p-6 md:p-8 grid md:grid-cols-2 gap-5">
+      <div><label class="block text-sm font-semibold text-gold-400 mb-1" for="ownerName">Your name</label>
+        <input id="ownerName" required type="text" placeholder="Full name" class="w-full bg-ink-900 border border-ink-600 focus:border-gold-500 outline-none rounded-lg px-4 py-2.5"></div>
+      <div><label class="block text-sm font-semibold text-gold-400 mb-1" for="ownerPhone">Phone number</label>
+        <input id="ownerPhone" required type="tel" pattern="[0-9+\s\-]{7,15}" placeholder="e.g. 9876543210" class="w-full bg-ink-900 border border-ink-600 focus:border-gold-500 outline-none rounded-lg px-4 py-2.5"></div>
+      <div><label class="block text-sm font-semibold text-gold-400 mb-1" for="petName">Pet’s name</label>
+        <input id="petName" required type="text" placeholder="e.g. Bruno" class="w-full bg-ink-900 border border-ink-600 focus:border-gold-500 outline-none rounded-lg px-4 py-2.5"></div>
+      <div><label class="block text-sm font-semibold text-gold-400 mb-1" for="petCategory">Pet category</label>
+        <select id="petCategory" required class="w-full bg-ink-900 border border-ink-600 focus:border-gold-500 outline-none rounded-lg px-4 py-2.5"></select></div>
+      <div class="md:col-span-2"><label class="block text-sm font-semibold text-gold-400 mb-1" for="serviceSelect">Service</label>
+        <select id="serviceSelect" required class="w-full bg-ink-900 border border-ink-600 focus:border-gold-500 outline-none rounded-lg px-4 py-2.5"></select></div>
+      <div><label class="block text-sm font-semibold text-gold-400 mb-1" for="visitDate">Preferred date</label>
+        <input id="visitDate" required type="date" class="w-full bg-ink-900 border border-ink-600 focus:border-gold-500 outline-none rounded-lg px-4 py-2.5"></div>
+      <div><label class="block text-sm font-semibold text-gold-400 mb-1" for="visitTime">Preferred time</label>
+        <select id="visitTime" required class="w-full bg-ink-900 border border-ink-600 focus:border-gold-500 outline-none rounded-lg px-4 py-2.5">
+          <option value="">Select time</option><option>09:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>02:00 PM</option><option>03:00 PM</option><option>04:00 PM</option><option>05:00 PM</option><option>06:00 PM</option>
+        </select></div>
+      <div class="md:col-span-2"><label class="block text-sm font-semibold text-gold-400 mb-1" for="notes">Symptoms or notes</label>
+        <textarea id="notes" rows="3" placeholder="Tell us about your pet’s condition or special needs" class="w-full bg-ink-900 border border-ink-600 focus:border-gold-500 outline-none rounded-lg px-4 py-2.5"></textarea></div>
+      <div class="md:col-span-2"><button type="submit" class="w-full bg-gold-500 hover:bg-gold-400 text-ink-900 font-heading font-bold py-3 rounded-xl transition">Send booking on WhatsApp</button></div>
+    </form>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <img id="aboutImg" alt="Cat and dog together" class="rounded-3xl border-2 border-gold-500/70 w-full h-80 object-cover" onerror="fallbackImg(this)">
+      <div>
+        <h2 class="font-heading font-extrabold text-3xl md:text-4xl">About GoldenPaw</h2>
+        <p class="mt-4 text-gray-300">We started GoldenPaw because every animal deserves kind, high-quality medical care. Modern diagnostics and a calm clinic help pets and their families feel safe at every visit.</p>
+        <p class="mt-3 text-gray-300">From puppies and kittens to rabbits, birds and other companions, one team handles prevention, treatment, surgery and grooming.</p>
+        <ul class="mt-4 space-y-2 text-gray-300"><li>✔ Fear-free handling</li><li>✔ In-house lab and diagnostics</li><li>✔ Clear advice and transparent prices</li></ul>
+      </div>
+    </div>
+    <div class="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-5 text-center">
+      <div class="bg-ink-800 border border-gold-500/30 rounded-2xl p-6"><div class="font-heading font-extrabold text-4xl text-gold-500"><span class="counter" data-target="5000">0</span>+</div><p class="text-gray-400 mt-1 text-sm">Pets treated</p></div>
+      <div class="bg-ink-800 border border-gold-500/30 rounded-2xl p-6"><div class="font-heading font-extrabold text-4xl text-gold-500"><span class="counter" data-target="12">0</span>+</div><p class="text-gray-400 mt-1 text-sm">Years of experience</p></div>
+      <div class="bg-ink-800 border border-gold-500/30 rounded-2xl p-6"><div class="font-heading font-extrabold text-4xl text-gold-500"><span class="counter" data-target="8">0</span></div><p class="text-gray-400 mt-1 text-sm">Vets and staff</p></div>
+      <div class="bg-ink-800 border border-gold-500/30 rounded-2xl p-6"><div class="font-heading font-extrabold text-4xl text-gold-500"><span class="counter" data-target="98">0</span>%</div><p class="text-gray-400 mt-1 text-sm">Happy pet parents</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="border-t border-gold-500/30 bg-ink-800 mt-10">
+  <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-gray-400">
+    <p>© <span id="year"></span> GoldenPaw Pet Clinic</p>
+    <p>📞 +91 63790 42698 · Open daily 9 AM to 7 PM</p>
+  </div>
+</footer>
+
+<script>
+const PHONE = "916379042698";
+
+const GOLD = "#F5B800", CR = "#FFF3C4", K = "#000", RED = "#E4572E";
+const dog = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="-58" cy="-10" rx="20" ry="46" fill="${K}" transform="rotate(18 -58 -10)"/><ellipse cx="58" cy="-10" rx="20" ry="46" fill="${K}" transform="rotate(-18 58 -10)"/><circle r="58" fill="${CR}"/><ellipse cy="22" rx="30" ry="22" fill="#fff"/><circle cx="-20" cy="-12" r="7" fill="${K}"/><circle cx="20" cy="-12" r="7" fill="${K}"/><ellipse cy="12" rx="11" ry="8" fill="${K}"/><path d="M0 20v10M-14 32q14 12 28 0" stroke="${K}" stroke-width="3" fill="none"/><path d="M-8 36q8 16 16 0z" fill="${RED}"/></g>`;
+const cat = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})"><path d="M-52-30L-48-80L-14-50zM52-30L48-80L14-50z" fill="${K}"/><circle r="56" fill="${CR}"/><ellipse cx="-20" cy="-8" rx="7" ry="10" fill="${K}"/><ellipse cx="20" cy="-8" rx="7" ry="10" fill="${K}"/><path d="M-6 8h12l-6 8z" fill="${RED}"/><path d="M0 16q-10 12-20 4M0 16q10 12 20 4M-30 14h-40M-30 22l-36 10M30 14h40M30 22l36 10" stroke="${K}" stroke-width="3" fill="none"/></g>`;
+const syr = (x, y, r) => `<g transform="translate(${x} ${y}) rotate(${r})"><rect x="-8" y="-50" width="16" height="70" rx="4" fill="#fff" stroke="${K}" stroke-width="3"/><rect x="-8" y="-20" width="16" height="30" fill="${GOLD}"/><rect x="-14" y="-54" width="28" height="6" fill="${K}"/><rect x="-3" y="-80" width="6" height="28" fill="${K}"/><rect x="-1.5" y="20" width="3" height="22" fill="${K}"/></g>`;
+const bubbles = '<g fill="#fff" fill-opacity=".85" stroke="#000" stroke-width="2"><circle cx="170" cy="120" r="22"/><circle cx="440" cy="105" r="16"/><circle cx="470" cy="200" r="26"/><circle cx="145" cy="235" r="14"/></g>';
+const tooth = `<g transform="translate(430 195)"><path d="M-40-50q20-14 40 0q20-14 40 0q4 40-8 70q-6 30-16 30q-8 0-10-30q-2-14-6-14t-6 14q-2 30-10 30q-10 0-16-30q-12-30-8-70z" fill="#fff" stroke="${K}" stroke-width="4"/></g><path d="M490 105l6 16 16 6-16 6-6 16-6-16-16-6 16-6z" fill="#fff"/>`;
+const badge = `<g transform="translate(300 95)"><circle r="28" fill="${K}"/><path d="M-6-16h12v10h10v12h-10v10h-12v-10h-10v-12h10z" fill="#fff"/></g>`;
+const ambulance = `<g transform="translate(300 200)"><rect x="-140" y="-70" width="200" height="110" rx="12" fill="#fff"/><path d="M60-50h50l30 40v50H60z" fill="#fff"/><path d="M72-40h30l22 30H72z" fill="${K}"/><rect x="-140" y="10" width="200" height="10" fill="${GOLD}"/><path d="M-70-50h20v20h20v20h-20v20h-20v-20h-20v-20h20z" fill="${RED}" transform="translate(0 -2)"/><circle cx="-80" cy="45" r="24" fill="${K}" stroke="#fff" stroke-width="5"/><circle cx="100" cy="45" r="24" fill="${K}" stroke="#fff" stroke-width="5"/></g>`;
+const microscope = `<path d="M365 290a90 90 0 0 0-30-170" fill="none" stroke="${K}" stroke-width="14" stroke-linecap="round"/><rect x="230" y="288" width="150" height="22" rx="8" fill="${K}"/><g transform="rotate(-25 280 150)"><rect x="255" y="70" width="50" height="120" rx="8" fill="${K}"/><rect x="265" y="190" width="30" height="26" fill="#fff"/></g><rect x="240" y="250" width="90" height="12" rx="4" fill="${K}"/>`;
+const brush = `<g transform="translate(430 210) rotate(30)"><rect x="-8" y="-10" width="16" height="80" rx="6" fill="${K}"/><rect x="-34" y="-50" width="68" height="42" rx="8" fill="#fff" stroke="${K}" stroke-width="4"/></g>`;
+const paw = `<g fill="${K}"><ellipse cx="300" cy="235" rx="62" ry="50"/><ellipse cx="205" cy="175" rx="24" ry="32" transform="rotate(-20 205 175)"/><ellipse cx="255" cy="120" rx="24" ry="32"/><ellipse cx="345" cy="120" rx="24" ry="32"/><ellipse cx="395" cy="175" rx="24" ry="32" transform="rotate(20 395 175)"/></g>`;
+const scenes = {
+  "🐶": dog(260, 195, 1.5) + syr(430, 205, 25),
+  "🦷": dog(230, 200, 1.3) + tooth,
+  "🐩": dog(300, 200, 1.5) + bubbles,
+  "🐱": cat(270, 200, 1.5) + syr(435, 205, 25),
+  "😺": cat(300, 200, 1.5) + `<g transform="translate(335 135) rotate(-30)"><rect x="-30" y="-9" width="60" height="18" rx="6" fill="#E9B97A"/></g>`,
+  "🐈": cat(280, 200, 1.5) + brush,
+  "🩺": dog(220, 215, 1.1) + cat(385, 220, 1.1) + badge,
+  "🚑": ambulance,
+  "🔬": microscope,
+  "🐶🐱": dog(210, 205, 1.3) + cat(400, 210, 1.3),
+  "🐾": paw
+};
+function art(emoji, label) {
+  return "data:image/svg+xml;utf8," + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="#1E1E1E"/>' +
+    '<circle cx="300" cy="185" r="150" fill="#F5B800"/>' + (scenes[emoji] || paw) +
+    '<text x="300" y="375" font-family="Arial" font-size="22" fill="#F5B800" text-anchor="middle">' + label + '</text></svg>');
+}
+const PLACEHOLDER = art("🐾", "GoldenPaw Pet Clinic");
+function fallbackImg(img) { img.onerror = null; img.src = PLACEHOLDER; }
+
+const services = [
+  { id:1, name:"Puppy vaccination package", category:"For Dogs", price:"₹800", emoji:"🐶", description:"Core vaccine series with deworming and a health check for puppies." },
+  { id:2, name:"Dog dental cleaning", category:"For Dogs", price:"₹2,500", emoji:"🦷", description:"Scaling and polishing to prevent gum disease and bad breath." },
+  { id:3, name:"Dog grooming and spa", category:"For Dogs", price:"₹1,200", emoji:"🐩", description:"Bath, haircut, nail trim, ear cleaning and tick treatment." },
+  { id:4, name:"Kitten vaccination package", category:"For Cats", price:"₹700", emoji:"🐱", description:"Essential vaccines, deworming and a wellness exam for kittens." },
+  { id:5, name:"Cat spay and neuter surgery", category:"For Cats", price:"₹3,000", emoji:"😺", description:"Safe surgery with monitored anesthesia and aftercare." },
+  { id:6, name:"Cat grooming and de-matting", category:"For Cats", price:"₹1,000", emoji:"🐈", description:"Gentle grooming, de-matting, nail trim and ear cleaning." },
+  { id:7, name:"General health checkup", category:"All Animals", price:"₹500", emoji:"🩺", description:"Full physical exam for any pet, with diet and care advice." },
+  { id:8, name:"Emergency care", category:"All Animals", price:"₹1,500", emoji:"🚑", description:"Urgent treatment for injuries, poisoning and breathing trouble." },
+  { id:9, name:"Lab tests and diagnostics", category:"All Animals", price:"₹900", emoji:"🔬", description:"Blood tests, X-ray and ultrasound with same-day results." }
+];
+const categories = ["All", "For Dogs", "For Cats", "All Animals"];
+let activeFilter = "All";
+
+function renderTabs() {
+  const wrap = document.getElementById("filterTabs");
+  wrap.innerHTML = categories.map(c => `<button data-filter="${c}" class="px-5 py-2 rounded-full font-semibold border-2 transition ${c === activeFilter ? 'bg-gold-500 text-ink-900 border-gold-500' : 'border-gold-500/50 text-gold-400 hover:border-gold-500'}">${c}</button>`).join("");
+  wrap.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { activeFilter = b.dataset.filter; renderTabs(); renderCatalog(); }));
+}
+
+function renderCatalog() {
+  const list = activeFilter === "All" ? services : services.filter(s => s.category === activeFilter);
+  document.getElementById("catalogGrid").innerHTML = list.map(s => `
+    <article class="bg-ink-800 border border-gold-500/25 rounded-2xl overflow-hidden flex flex-col">
+      <img src="${art(s.emoji, s.category)}" alt="${s.name}" class="h-44 w-full object-cover" onerror="fallbackImg(this)">
+      <div class="p-5 flex flex-col flex-1">
+        <span class="text-xs font-semibold text-gold-400 bg-gold-500/10 px-2 py-1 rounded-full self-start">${s.category}</span>
+        <h3 class="font-heading font-bold text-lg mt-3">${s.name}</h3>
+        <p class="text-sm text-gray-400 mt-1 flex-1">${s.description}</p>
+        <div class="flex items-center justify-between mt-4">
+          <span class="font-heading font-bold text-xl text-gold-500">${s.price}</span>
+          <button onclick="bookService(${s.id})" class="bg-gold-500 hover:bg-gold-400 text-ink-900 text-sm font-bold px-4 py-2 rounded-lg transition">Book this service</button>
+        </div>
+      </div>
+    </article>`).join("");
+}
+
+const petCategory = document.getElementById("petCategory");
+const serviceSelect = document.getElementById("serviceSelect");
+
+function populateCategories() {
+  petCategory.innerHTML = '<option value="">Select category</option>' + categories.filter(c => c !== "All").map(c => `<option value="${c}">${c}</option>`).join("");
+  populateServices("");
+}
+function populateServices(cat) {
+  if (!cat) { serviceSelect.innerHTML = '<option value="">Select a category first</option>'; serviceSelect.disabled = true; return; }
+  serviceSelect.disabled = false;
+  const opts = services.filter(s => s.category === cat || s.category === "All Animals");
+  serviceSelect.innerHTML = '<option value="">Select service</option>' + opts.map(s => `<option value="${s.id}">${s.name} (${s.price})</option>`).join("");
+}
+petCategory.addEventListener("change", () => populateServices(petCategory.value));
+
+function bookService(id) {
+  const s = services.find(x => x.id === id);
+  showSection("booking");
+  petCategory.value = s.category;
+  populateServices(s.category);
+  serviceSelect.value = String(id);
+}
+
+document.getElementById("bookingForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const svc = services.find(s => String(s.id) === serviceSelect.value);
+  const lines = [
+    "*New appointment request - GoldenPaw Pet Clinic*",
+    "Owner: " + document.getElementById("ownerName").value.trim(),
+    "Phone: " + document.getElementById("ownerPhone").value.trim(),
+    "Pet name: " + document.getElementById("petName").value.trim(),
+    "Category: " + petCategory.value,
+    "Service: " + (svc ? svc.name + " (" + svc.price + ")" : "-"),
+    "Date: " + document.getElementById("visitDate").value,
+    "Time: " + document.getElementById("visitTime").value,
+    "Notes: " + (document.getElementById("notes").value.trim() || "None")
+  ];
+  window.open("https://wa.me/" + PHONE + "?text=" + encodeURIComponent(lines.join("\n")), "_blank");
+});
+
+let countersDone = false;
+function showSection(id) {
+  document.querySelectorAll(".section").forEach(s => s.classList.toggle("active", s.id === id));
+  document.querySelectorAll("[data-nav]").forEach(b => b.classList.toggle("active", b.dataset.nav === id));
+  document.getElementById("mobileMenu").classList.add("hidden");
+  window.scrollTo(0, 0);
+  if (id === "about" && !countersDone) { countersDone = true; runCounters(); }
+}
+function runCounters() {
+  document.querySelectorAll(".counter").forEach(el => {
+    const target = +el.dataset.target, step = Math.max(1, Math.ceil(target / 80));
+    let n = 0;
+    const t = setInterval(() => { n += step; if (n >= target) { n = target; clearInterval(t); } el.textContent = n.toLocaleString(); }, 20);
+  });
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("visitDate").min = new Date().toISOString().split("T")[0];
+document.getElementById("heroImg").src = art("🐶🐱", "Care for dogs, cats and all animals");
+document.getElementById("aboutImg").src = art("🐾", "Healthy pets, happy families");
+renderTabs();
+renderCatalog();
+populateCategories();
+showSection("home");
+</script>
+</body>
+</html>
